@@ -1,0 +1,6 @@
+distfiles/*
+packages/*
+.ebuild_cache/
+*.tar.gz
+*.bz2
+*.xz
