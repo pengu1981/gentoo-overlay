@@ -1,0 +1,7 @@
+--- a/etg/propgriddefs.py
++++ b/etg/propgriddefs.py
+@@ -57,3 +57,2 @@
+     # customizing the generated code and docstrings.
+-    module.find('wxPGSortCallback').ignore()
+     # Newer Doxygen versions only emit this duplicate typedef in propgrid.h.
+
