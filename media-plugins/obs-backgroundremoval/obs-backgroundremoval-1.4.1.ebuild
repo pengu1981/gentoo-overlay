@@ -5,13 +5,12 @@ EAPI=8
 
 inherit cmake
 
-ONNXRUNTIME_VERSION=1.30.1
 
 DESCRIPTION="OBS plugin for removing background"
 HOMEPAGE="https://github.com/occ-ai/obs-backgroundremoval"
 SRC_URI="
 	https://github.com/occ-ai/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz
-	https://github.com/microsoft/onnxruntime/releases/download/v${ONNXRUNTIME_VERSION}/onnxruntime-linux-x64-gpu_cuda13-${ONNXRUNTIME_VERSION}.tgz
+	
 "
 
 LICENSE="GPL-2"
@@ -33,13 +32,13 @@ src_configure() {
 	mycmakeargs=(
 		
 		-B "${BUILD_DIR}"
-	
+		-Donnxruntime_DIR="${EPREFIX}/usr/lib64/cmake/onnxruntime"	
 	)
 	cmake_src_configure
 }
 
 src_compile() {
-	chrpath -d "${WORKDIR}/onnxruntime-linux-x64-gpu-${ONNXRUNTIME_VERSION}/lib/libonnxruntime.so.${ONNXRUNTIME_VERSION}"
+	
 
 	cmake_src_compile
 }
