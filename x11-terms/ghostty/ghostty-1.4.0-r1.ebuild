@@ -179,18 +179,18 @@ src_test() {
 }
 
 src_install() {
-        
         zig_src_install
 
-        
         if [[ -d "${ED}/usr" ]]; then
+                # 1. Sandbox-Pfade bereinigen
                 find "${ED}/usr" -type f \( -name "*.cmake" -o -name "*.pc" \) -exec sed -i \
                         "s|/var/tmp/portage/.*/image/usr|/usr|g" {} +
+
+                # 2. Bibliotheksversion für Kwi auf stabile 1.0.0 patchen (falls nötig)
+                find "${ED}/usr" -type f \( -name "*.cmake" -o -name "*.pc" \) -exec sed -i \
+                        "s/0\.1\.0-dev/1.0.0/g" {} +
         fi
 }
-
-
-
 
 pkg_postinst() {
 	ewarn "This build of Ghostty does not include bundled iTerm2 color schemes,"
