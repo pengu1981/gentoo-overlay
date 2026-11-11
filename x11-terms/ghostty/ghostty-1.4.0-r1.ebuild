@@ -178,6 +178,20 @@ src_test() {
 	DESTDIR="${BUILD_DIR}" nonfatal ezig build test "${my_zbs_args[@]}" || die "Running tests failed!"
 }
 
+src_install() {
+        
+        zig_src_install
+
+        
+        if [[ -d "${ED}/usr" ]]; then
+                find "${ED}/usr" -type f \( -name "*.cmake" -o -name "*.pc" \) -exec sed -i \
+                        "s|/var/tmp/portage/.*/image/usr|/usr|g" {} +
+        fi
+}
+
+
+
+
 pkg_postinst() {
 	ewarn "This build of Ghostty does not include bundled iTerm2 color schemes,"
 	ewarn "due to uncertainty around theme licensing:"
