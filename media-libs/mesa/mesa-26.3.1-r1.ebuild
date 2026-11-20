@@ -36,6 +36,7 @@ if [[ ${PV} == 9999 ]]; then
 else
 	SRC_URI="
 		https://archive.mesa3d.org/${MY_P}.tar.xz
+		https://gitlab.freedesktop.org/virgl/venus-protocol/-/archive/v1.1.3/venus-protocol-v1.1.3.tar.bz2
 	"
 	KEYWORDS="~alpha ~amd64 ~arm ~arm64 ~hppa ~loong ~mips ~ppc ~ppc64 ~riscv ~s390 ~sparc ~x86 ~x64-solaris"
 fi
@@ -195,6 +196,8 @@ src_unpack() {
 		git-r3_src_unpack
 	else
 		unpack ${MY_P}.tar.xz
+		unpack venus-protocol-v1.1.3.tar.bz2
+		mv "${WORKDIR}/venus-protocol-v1.1.3" "${S}/subprojects/venus-protocol-1.1.3" || die
 	fi
 
 	if use opencl || use video_cards_nvk; then
